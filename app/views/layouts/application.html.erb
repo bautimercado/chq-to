@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ChqTo</title>
+    <title>Chq-To</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
   </head>
+  <body class="bg-gray-100 font-sans">
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <nav class="bg-red-800 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-white text-2xl font-bold">Chq.To</a>
+
+        <div>
+          <% if signed_in? %>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"%>
+          <% else %>
+            <a href="<%= new_user_session_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign In</a>
+            <a href="<%= new_user_registration_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign Up</a>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto mt-10 px-5 flex flex-col items-center">
+      <% if notice.present? %>
+        <div class="bg-green-500 text-white py-2 px-4 mb-4 rounded">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="bg-red-500 text-white py-2 px-4 mb-4 rounded">
+          <%= alert %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>
