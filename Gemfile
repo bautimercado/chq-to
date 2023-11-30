@@ -28,9 +28,9 @@ gem "jbuilder"
 
 gem "devise"
 
-# gem "shortener"
+gem 'validates_timeliness', '~> 7.0.0.beta1'
 
-gem "will_paginate"
+# gem "will_paginate"
 
 gem "tailwindcss-rails"
 

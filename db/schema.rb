@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_235331) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_135108) do
+  create_table "links", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "url", null: false
+    t.string "name"
+    t.string "type", null: false
+    t.string "password"
+    t.date "expiration_data"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "encrypted_password", null: false
