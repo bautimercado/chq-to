@@ -28,7 +28,7 @@ gem "jbuilder"
 
 gem "devise"
 
-gem "shortener"
+# gem "shortener"
 
 gem "will_paginate"
 
