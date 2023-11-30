@@ -1,4 +1,21 @@
-<div class="container mx-auto mt-8">
-  <h1 class="text-4xl font-bold text-gray-800 mb-4">Bienvenido a Chq.To</h1>
-  <p class="text-lg">Find me in app/views/home/index.html.erb</p>
+<div class="container mx-auto mt-16">
+  <h1 class="text-4xl font-bold text-gray-800 mb-8">Welcome to chq.to!</h1>
+
+  <p class="text-lg text-gray-700 mb-4">
+    chq.to is your platform to shorten and manage your links.
+  </p>
+
+  <ul class="list-disc list-inside mb-6">
+    <li class="mb-2">Create and manage your short links efficiently.</li>
+    <li class="mb-2">Access statistics related to your short links.</li>
+  </ul>
+
+  <% if signed_in? %>
+    <p class="text-lg text-green-500">Hello <%= current_user.username %>!</p>
+  <% else %>
+    <div class="flex space-x-4">
+      <a href="<%= new_user_session_path %>" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Log In</a>
+      <a href="<%= new_user_registration_path %>" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Sign Up</a>
+    </div>
+  <% end %>
 </div>

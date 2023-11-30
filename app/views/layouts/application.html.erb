@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Chq-To</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chq.To</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
@@ -18,9 +18,10 @@
       <div class="container mx-auto flex justify-between items-center">
         <a href="/" class="text-white text-2xl font-bold">Chq.To</a>
 
-        <div>
+        <div class="flex items-center">
           <% if signed_in? %>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"%>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4"%>
+            <%= link_to "Profile", user_path(current_user), class: "text-white hover:text-gray-200 px-4 py-2"%>
           <% else %>
             <a href="<%= new_user_session_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign In</a>
             <a href="<%= new_user_registration_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign Up</a>
@@ -46,3 +47,4 @@
     </main>
   </body>
 </html>
+
