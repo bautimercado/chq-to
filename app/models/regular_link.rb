@@ -1,4 +1,4 @@
-class RegularLink < ApplicationRecord
+class RegularLink < Link
 
   def redirect(_link)
     true

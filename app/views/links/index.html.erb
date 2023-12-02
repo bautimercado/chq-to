@@ -1,14 +1,28 @@
 <div class="w-full">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <div class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
+      <%= notice %>
+    </div>
   <% end %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center mb-4">
     <h1 class="font-bold text-4xl">Links</h1>
     <%= link_to "New link", new_link_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="links" class="min-w-full">
-    <%= render @links %>
+    <% @links.each do |link| %>
+      <div class="mb-6 p-4 bg-white border border-gray-200 rounded-lg shadow">
+        <p class="text-gray-700">
+          Original URL: <%= link.url %><br>
+          Short URL: <%= link.slug %><br>
+          Type: <%= link.type %><br>
+          <% if link.name.present? %>
+            Name: <%= link.name %><br>
+          <% end %>
+        </p>
+        <%= link_to 'Edit', edit_link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,4 +1,8 @@
-class PrivateLink < ApplicationRecord
+require 'bcrypt'
+
+class PrivateLink < Link
+  before_save :hash_password
+
   validates :password, presence: true
 
   def redirect(entered_passwd)
@@ -7,6 +11,11 @@ class PrivateLink < ApplicationRecord
     else
       false
     end
+  end
+
+  private
+  def hash_password
+    self.password = BCrypt::Password.create(self.password)
   end
 
 end

@@ -12,12 +12,13 @@
 
 ActiveRecord::Schema[7.1].define(version: 2023_11_30_135108) do
   create_table "links", force: :cascade do |t|
-    t.string "slug", null: false
+    t.string "slug", default: "", null: false
     t.string "url", null: false
     t.string "name"
     t.string "type", null: false
     t.string "password"
-    t.date "expiration_data"
+    t.date "expiration_date"
+    t.boolean "accessed"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
