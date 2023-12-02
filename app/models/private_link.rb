@@ -5,11 +5,11 @@ class PrivateLink < Link
 
   validates :password, presence: true
 
-  def redirect(entered_passwd)
-    if entered_passwd == password
-      true
+  def redirect(attempt_password)
+    if BCrypt::Password.new(self.password) == attempt_password
+      { success: true }
     else
-      false
+      { success: false, messsage: "The password entered is incorrect, please try again." }
     end
   end
 

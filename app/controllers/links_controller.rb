@@ -29,7 +29,6 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     respond_to do |format|
       if @link.save
-        @link.update(slug: encode_url(@link.url))
         format.html { redirect_to links_path, notice: "Link was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +40,6 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if @link.update(link_params)
-        @link.update(slug: "l/#{encode_url(@link.url)}")
         format.html { redirect_to link_url(@link), notice: "Link was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,6 +57,10 @@ class LinksController < ApplicationController
     end
   end
 
+  def redirect_to_original_url
+    res = @link.redirect
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
@@ -68,13 +70,6 @@ class LinksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def link_params
       params.require(:link).permit(:url, :type, :name, :expiration_date, :password, :entered, :user_id)
-    end
-
-    def encode_url(url)
-      #utf8_url = url.force_encoding('UTF-8')
-      hashed_url = Digest::SHA2.hexdigest(url)
-      short_hash = Base64.urlsafe_encode64(hashed_url)[0, 8]
-      slug = "#{Rails.application.routes.default_url_options[:host]}l/#{short_hash}"
     end
 
 end

@@ -4,11 +4,11 @@ class TemporalLink < Link
   validates :expiration_date, presence: true
   validates_date :expiration_date, on_or_after: lambda { Date.current }
 
-  def redirect(_link)
-    if Date.today <= self.expiration_date
-      true
+  def redirect
+    if Date.current <= self.expiration_date
+      { success: true }
     else
-      false
+      { success: false, status: 404 }
     end
   end
 end
