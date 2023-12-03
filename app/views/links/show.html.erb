@@ -1,11 +1,27 @@
 <div class="mx-auto md:w-2/3 w-full flex">
+  <% if @error_message %>
+    <p class="error-message"><%= @error_message %></p>
+  <% end %>
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @link %>
-
+    <p class="text-gray-700">
+      Original URL: <%= @link.url %><br>
+      Short URL: <%= @link.slug %><br>
+      Type: <%= @link.type %><br>
+      <% if @link.name.present? %>
+        Name: <%= @link.name %><br>
+      <% end %>
+      <% if @link.expiration_date.present? %>
+        Expiration date: <%= @link.expiration_date %><br>
+      <% end %>
+      <% if @link.accessed.present? %>
+        Accessed: <%= @link.accessed %><br>
+      <% end %>
+    </p>
+    <%= link_to "Redirect", redirect_to_original_url(@link.slug) %>
     <%= link_to "Edit this link", edit_link_path(@link), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to "Destroy this link", link_path(@link), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>

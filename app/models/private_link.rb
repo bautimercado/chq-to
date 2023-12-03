@@ -9,7 +9,7 @@ class PrivateLink < Link
     if BCrypt::Password.new(self.password) == attempt_password
       { success: true }
     else
-      { success: false, messsage: "The password entered is incorrect, please try again." }
+      { success: false, message: "The password entered is incorrect, please try again." }
     end
   end
 

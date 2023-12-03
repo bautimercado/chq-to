@@ -3,7 +3,9 @@ require 'base64'
 
 class LinksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_link, only: %i[ show edit update destroy ]
+  #before_action :link_by_slug, only: %i[ redirect_to_original_url validate_password ]
+  #before_action :set_link, except: %i[ index, new, create ]
+  before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password ]
 
   # GET /links or /links.json
   def index
@@ -12,6 +14,7 @@ class LinksController < ApplicationController
 
   # GET /links/1 or /links/1.json
   def show
+    @error_message = flash[:error]
   end
 
   # GET /links/new
@@ -57,14 +60,41 @@ class LinksController < ApplicationController
     end
   end
 
-  def redirect_to_original_url
+  # GET /links/r/slug
+  def redirect_to_original
+    if @link.type == "PrivateLink"
+      render "links/password_form" and return
+    end
     res = @link.redirect
+    if res[:success]
+      redirect_to @link.url, allow_other_host: true
+    else
+      flash[:error] = res[:message]
+      render file: "#{Rails.root}/public/#{res[:status]}.html", layout: false
+    end
+    # render :file => "#{Rails.root}/public/#{result[:status]}.html"
+  end
+
+  # POST /links/r/passwd/slug
+  def verify_password
+    res = @link.redirect(params[:password])
+
+    if res[:success]
+      redirect_to @link.url, allow_other_host: true
+    else
+      flash.now[:error] = res[:message]
+      render "links/password_form"
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find(params[:id])
+      if params[:id]
+        @link = Link.find(params[:id])
+      elsif params[:slug]
+        @link = Link.find_by(slug: params[:slug])
+      end
     end
 
     # Only allow a list of trusted parameters through.

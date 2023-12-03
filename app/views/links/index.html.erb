@@ -20,6 +20,13 @@
           <% if link.name.present? %>
             Name: <%= link.name %><br>
           <% end %>
+          <% if link.expiration_date.present? %>
+            Expiration date: <%= link.expiration_date %><br>
+          <% end %>
+          <% if link.accessed.present? %>
+            Accessed: <%= link.accessed %><br>
+          <% end %>
+          <%= link_to 'Show', link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
         </p>
         <%= link_to 'Edit', edit_link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
       </div>

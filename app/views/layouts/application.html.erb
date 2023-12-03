@@ -13,6 +13,7 @@
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "links", "data-turbo-track": "reload" %>
+    <meta name="csrf-token" content="<%= form_authenticity_token %>" />
   </head>
   <body class="bg-gray-100 font-sans">
 

@@ -1,14 +1,18 @@
 class EphemeralLink < Link
-  before_save :enable_access
+  before_create :enable_access
 
   #validates :accessed, inclusion: { in: [true, false] },
   #          exclusion: { in: [nil] }
 
   def redirect
-    if accessed
+    puts "IIIINNNN EPHEMERAL REDIREEEECT"
+    puts "STATE: #{self.accessed}"
+    if self.accessed
       { success: false, status: 403 }
     else
-      self.accessed = true
+      puts "CORRECT!"
+      self.update(accessed: true)
+      puts "NEW STATE: #{self.accessed}"
       { success: true }
     end
   end
