@@ -5,14 +5,10 @@ class EphemeralLink < Link
   #          exclusion: { in: [nil] }
 
   def redirect
-    puts "IIIINNNN EPHEMERAL REDIREEEECT"
-    puts "STATE: #{self.accessed}"
     if self.accessed
       { success: false, status: 403 }
     else
-      puts "CORRECT!"
       self.update(accessed: true)
-      puts "NEW STATE: #{self.accessed}"
       { success: true }
     end
   end

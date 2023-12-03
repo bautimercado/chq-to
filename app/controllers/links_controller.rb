@@ -3,8 +3,6 @@ require 'base64'
 
 class LinksController < ApplicationController
   before_action :authenticate_user!
-  #before_action :link_by_slug, only: %i[ redirect_to_original_url validate_password ]
-  #before_action :set_link, except: %i[ index, new, create ]
   before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password ]
 
   # GET /links or /links.json
@@ -72,7 +70,6 @@ class LinksController < ApplicationController
       flash[:error] = res[:message]
       render file: "#{Rails.root}/public/#{res[:status]}.html", layout: false
     end
-    # render :file => "#{Rails.root}/public/#{result[:status]}.html"
   end
 
   # POST /links/r/passwd/slug
