@@ -1,8 +1,7 @@
 class LinksController < ApplicationController
-  # Limitar el autenticate_user solo a editar, update, destroy, show, etc.
-  # Agregar método privado para verificar que el usuario sea el dueño para editar, ver, etc.
   before_action :authenticate_user!, except: [ :redirect_to_original, :verify_password ]
   before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password ]
+  before_action :only_owner, only: [ :show, :edit, :update, :destroy ]
 
   # GET /links or /links.json
   def index
@@ -98,4 +97,10 @@ class LinksController < ApplicationController
       params.require(:link).permit(:url, :type, :name, :expiration_date, :password, :entered, :user_id)
     end
 
+    def only_owner
+      @link = Link.find(params[:id])
+      unless @link.user == current_user
+        render file: "#{Rails.root}/public/403.html", layout: false
+      end
+    end
 end
