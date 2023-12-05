@@ -1,8 +1,7 @@
-require 'digest/sha2'
-require 'base64'
-
 class LinksController < ApplicationController
-  before_action :authenticate_user!
+  # Limitar el autenticate_user solo a editar, update, destroy, show, etc.
+  # Agregar método privado para verificar que el usuario sea el dueño para editar, ver, etc.
+  before_action :authenticate_user!, except: [ :redirect_to_original, :verify_password ]
   before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password ]
 
   # GET /links or /links.json

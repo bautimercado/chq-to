@@ -1,6 +1,7 @@
 require 'date'
 
 class TemporalLink < Link
+  # Agregar también la hora
   validates :expiration_date, presence: true
   validates_date :expiration_date, on_or_after: lambda { Date.current }
 
