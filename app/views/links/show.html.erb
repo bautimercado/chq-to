@@ -10,7 +10,7 @@
 
     <div class="text-gray-700">
       <p class="font-semibold mb-4">Original URL: <%= @link.url %></p>
-      <p class="font-semibold mb-4">Short URL: <%= @link.slug %></p>
+      <p class="font-semibold mb-4">Short URL: <%= "#{Rails.application.routes.default_url_options[:host]}/l/#{@link.slug}" %></p>
       <p class="font-semibold mb-4">Type: <%= @link.type %></p>
       <% if @link.name.present? %>
         <p class="font-semibold mb-4">Name: <%= @link.name %></p>

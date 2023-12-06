@@ -18,6 +18,6 @@ class Link < ApplicationRecord
     #unique_hash = "#{hashed_url}-#{self.id}"
     #self.slug = Base64.urlsafe_encode64(unique_hash)[0, 8]
     self.slug = SecureRandom.uuid[0..7]
-    self.short_url = "#{Rails.application.routes.default_url_options[:host]}/links/r/#{self.slug}"
+    #self.short_url = "#{Rails.application.routes.default_url_options[:host]}/links/r/#{self.slug}"
   end
 end
