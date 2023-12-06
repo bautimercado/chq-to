@@ -32,7 +32,7 @@
 
     <div class="mb-4" id="link_expiration_date_field" style="display: none;">
       <%= f.label :expiration_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= f.date_field :expiration_date, as: :date, min: Date.current, class: "w-full border rounded-md py-2 px-3" %>
+      <%= f.datetime_field :expiration_date, as: :date, min: Date.current, class: "w-full border rounded-md py-2 px-3" %>
     </div>
 
     <div class="mb-4" id="password_field" style="display: none;">

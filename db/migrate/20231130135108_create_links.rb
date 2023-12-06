@@ -7,7 +7,7 @@ class CreateLinks < ActiveRecord::Migration[7.1]
       t.string :name, null: true
       t.string :type, null: false
       t.string :password, null: true
-      t.date :expiration_date, null: true
+      t.datetime :expiration_date, null: true
       t.boolean :accessed, null: true
       t.belongs_to :user, index: true
 

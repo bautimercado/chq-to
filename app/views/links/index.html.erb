@@ -11,25 +11,29 @@
   </div>
 
   <div id="links" class="min-w-full">
-    <% @links.each do |link| %>
-      <div class="mb-6 p-4 bg-white border border-gray-200 rounded-lg shadow">
-        <p class="text-gray-700">
-          Original URL: <%= link.url %><br>
-          Short URL: <%= link.slug %><br>
-          Type: <%= link.type %><br>
-          <% if link.name.present? %>
-            Name: <%= link.name %><br>
-          <% end %>
-          <% if link.expiration_date.present? %>
-            Expiration date: <%= link.expiration_date %><br>
-          <% end %>
-          <% if link.accessed.present? %>
-            Accessed: <%= link.accessed %><br>
-          <% end %>
-          <%= link_to 'Show', link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
-        </p>
-        <%= link_to 'Edit', edit_link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
-      </div>
+    <% if @links.any? %>
+      <% @links.each do |link| %>
+        <div class="mb-6 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
+          <p class="text-gray-700">
+            <span class="font-semibold">Original URL:</span> <%= link.url %><br>
+            <span class="font-semibold">Short URL:</span> <%= link.slug %><br>
+            <span class="font-semibold">Type:</span> <%= link.type %><br>
+            <% if link.name.present? %>
+              <span class="font-semibold">Name:</span> <%= link.name %><br>
+            <% end %>
+            <% if link.expiration_date.present? %>
+              <span class="font-semibold">Expiration date:</span> <%= link.expiration_date %><br>
+            <% end %>
+            <% if link.accessed.present? %>
+              <span class="font-semibold">Accessed:</span> <%= link.accessed %><br>
+            <% end %>
+            <%= link_to 'Show', link_path(link.id), class: "text-blue-500 font-medium hover:underline" %>
+          </p>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-gray-700">You don't have any links yet. <%= link_to 'Create a new link', new_link_path, class: "text-blue-500 font-medium hover:underline" %>.</p>
     <% end %>
   </div>
 </div>
+
