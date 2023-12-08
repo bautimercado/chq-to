@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post "/l/passwd/:slug", to: "links#verify_password"
 
   get "/links/:id/access_per_day", to: "links#access_per_day", as: "access_per_day"
+  get "/links/:id/access_details", to: "links#access_details", as: "access_details"
 
   # Defines the root path route ("/")
   root "home#index"

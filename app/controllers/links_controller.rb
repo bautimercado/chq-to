@@ -90,7 +90,23 @@ class LinksController < ApplicationController
 
   # GET /links/1/access_details
   def access_details
+    @access_details = @link.accesses
 
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    ip = params[:ip]
+
+    if start_date.present? && end_date.present?
+      if start_date > end_date
+        flash[:error] = 'Start date must be before end date.'
+        redirect_to access_details_path(@link)
+      end
+      start_datetime = DateTime.parse(start_date.to_s).beginning_of_day
+      end_datetime = DateTime.parse(end_date.to_s).end_of_day
+      @access_details = @access_details.where(created_at: start_datetime..end_datetime)
+    end
+
+    @access_details = @access_details.where(ip_address: ip) if ip.present?
   end
 
   private
@@ -105,7 +121,7 @@ class LinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def link_params
-      params.require(:link).permit(:url, :type, :name, :expiration_date, :password, :entered, :user_id)
+      params.require(:link).permit(:url, :type, :name, :expiration_date, :password, :entered, :user_id, :start_date, :end_date, :ip)
     end
 
     def only_owner

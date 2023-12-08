@@ -1,0 +1,40 @@
+<div class="container mx-auto mt-8">
+  <h1 class="text-4xl font-bold text-gray-800 mb-4">Access Details</h1>
+
+  <% if flash[:error].present? %>
+    <p class="text-red-500"><%= flash[:error] %></p>
+  <% end %>
+
+  <div class="flex items-center mb-4">
+    <%= form_tag(access_details_path(@link), method: :get, class: "mr-4") do %>
+      <%= label_tag 'start_date', 'Start Date:', class: "text-gray-700" %>
+      <%= date_field_tag 'start_date', params[:start_date], class: "ml-2 rounded-lg py-1 px-2 bg-gray-100" %>
+
+      <%= label_tag 'end_date', 'End Date:', class: "ml-4 text-gray-700" %>
+      <%= date_field_tag 'end_date', params[:end_date], class: "ml-2 rounded-lg py-1 px-2 bg-gray-100" %>
+
+      <%= label_tag 'ip', 'IP Address:', class: "ml-4 text-gray-700" %>
+      <%= text_field_tag 'ip', params[:ip], class: "ml-2 rounded-lg py-1 px-2 bg-gray-100" %>
+
+      <%= submit_tag 'Filter', class: "ml-4 rounded-lg py-2 px-4 bg-blue-600 text-white font-medium", type: 'submit' %>
+    <% end %>
+  </div>
+
+  <% if @access_details.present? %>
+    <ul class="list-disc ml-4">
+      <% @access_details.each do |access| %>
+        <li class="text-gray-700 mb-2">
+          <%= "Date: #{access.created_at}, IP: #{access.ip_address}" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-gray-700">No access details available.</p>
+  <% end %>
+
+  <% if params[:start_date].present? || params[:end_date].present? || params[:ip].present? %>
+    <%= button_to "Clear Filters", access_details_path(@link), method: :get, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <% end %>
+
+  <%= link_to "Back", root_path, class: "mt-4 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>
