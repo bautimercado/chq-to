@@ -32,6 +32,10 @@
     <p class="text-gray-700">No access details available.</p>
   <% end %>
 
+  <div class="text-center my-4">
+    <%= paginate @access_details %>
+  </div>
+
   <% if params[:start_date].present? || params[:end_date].present? || params[:ip].present? %>
     <%= button_to "Clear Filters", access_details_path(@link), method: :get, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   <% end %>

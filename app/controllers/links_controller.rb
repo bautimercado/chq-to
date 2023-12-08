@@ -5,7 +5,7 @@ class LinksController < ApplicationController
 
   # GET /links or /links.json
   def index
-    @links = current_user.links
+    @links = current_user.links.page params[:page]
   end
 
   # GET /links/1 or /links/1.json
@@ -107,6 +107,8 @@ class LinksController < ApplicationController
     end
 
     @access_details = @access_details.where(ip_address: ip) if ip.present?
+
+    @access_details = @access_details.page params[:page]
   end
 
   private
@@ -121,7 +123,10 @@ class LinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def link_params
-      params.require(:link).permit(:url, :type, :name, :expiration_date, :password, :entered, :user_id, :start_date, :end_date, :ip)
+      params.require(:link).permit(
+          :url, :type, :name, :expiration_date, :password, :entered,
+          :user_id, :start_date, :end_date, :ip, :page
+      )
     end
 
     def only_owner
