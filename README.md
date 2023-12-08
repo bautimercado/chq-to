@@ -1,24 +1,41 @@
-# README
+# Trabajo Integrado - TTPS Ruby 2023
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Alumno:
 
-Things you may want to cover:
+- Bautista Mercado
+- 18477/0
+- mercadob267@gmail.com
 
-* Ruby version
+## Dependencias:
 
-* System dependencies
+- Ruby 2.7.8
+- Rails 7.1.2
+- devise
+- validates_timeliness
+- tailwindcss-rails
 
-* Configuration
+# Instalación
 
-* Database creation
+1. Instalar dependencias
 
-* Database initialization
+```bash
+bundle install
+```
 
-* How to run the test suite
+2. Crear base de datos
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails db:migrate
+```
 
-* Deployment instructions
+3. Tailwindcss build
 
-* ...
+```bash
+rails tailwindcss:build
+```
+
+4. Ejecutar aplicación
+
+```bash
+rails s
+```
