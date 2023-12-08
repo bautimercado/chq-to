@@ -63,6 +63,7 @@ class LinksController < ApplicationController
     end
     res = @link.redirect
     if res[:success]
+      register_access
       redirect_to @link.url, allow_other_host: true
     else
       flash[:error] = res[:message]
@@ -102,5 +103,9 @@ class LinksController < ApplicationController
       unless @link.user == current_user
         render file: "#{Rails.root}/public/403.html", layout: false
       end
+    end
+
+    def register_access
+      Access.create(link_id: @link.id, ip_address: request.remote_ip)
     end
 end

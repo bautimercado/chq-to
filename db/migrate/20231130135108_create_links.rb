@@ -2,7 +2,6 @@ class CreateLinks < ActiveRecord::Migration[7.1]
   def change
     create_table :links do |t|
       t.string :slug, null: false, default: ""
-      t.string :short_url, null: false, default: ""
       t.string :url, null: false
       t.string :name, null: true
       t.string :type, null: false

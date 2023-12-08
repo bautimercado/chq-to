@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_135108) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_135402) do
+  create_table "accesses", force: :cascade do |t|
+    t.string "ip_address", null: false
+    t.integer "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_accesses_on_link_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "slug", default: "", null: false
-    t.string "short_url", default: "", null: false
     t.string "url", null: false
     t.string "name"
     t.string "type", null: false

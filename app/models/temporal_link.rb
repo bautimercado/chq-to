@@ -1,9 +1,8 @@
 #require 'date_time'
 
 class TemporalLink < Link
-  # Agregar también la hora
   validates :expiration_date, presence: true
-  validates_date :expiration_date, on_or_after: lambda { Date.current }
+  validates_datetime :expiration_date, on_or_after: lambda { DateTime.current }
 
   def redirect
     if DateTime.current <= self.expiration_date
