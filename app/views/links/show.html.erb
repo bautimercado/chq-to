@@ -28,6 +28,7 @@
       <div class="flex space-x-2">
         <%= link_to "Edit", edit_link_path(@link), class: "rounded-lg py-3 px-5 bg-gray-100 text-gray-800 font-medium" %>
         <%= button_to "Destroy", link_path(@link), method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-500 text-white font-medium" %>
+        <%= link_to "Access count per day", access_per_day_path(@link) %>
       </div>
       <%= link_to "Back to links", links_path, class: "rounded-lg py-3 px-5 bg-gray-100 text-gray-800 font-medium" %>
     </div>

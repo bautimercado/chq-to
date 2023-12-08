@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "/l/:slug", to: "links#redirect_to_original", as: "redirect_to_original"
   post "/l/passwd/:slug", to: "links#verify_password"
 
+  get "/links/:id/access_per_day", to: "links#access_per_day", as: "access_per_day"
+
   # Defines the root path route ("/")
   root "home#index"
 end

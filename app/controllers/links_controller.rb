@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!, except: [ :redirect_to_original, :verify_password ]
-  before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password ]
+  before_action :set_link, only: [ :show, :edit, :update, :destroy, :redirect_to_original, :verify_password, :access_per_day, :access_details ]
   before_action :only_owner, only: [ :show, :edit, :update, :destroy ]
 
   # GET /links or /links.json
@@ -20,7 +20,6 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
-    @link = Link.find(params[:id])
   end
 
   # POST /links or /links.json
@@ -56,7 +55,7 @@ class LinksController < ApplicationController
     end
   end
 
-  # GET /links/r/slug
+  # GET /l/slug
   def redirect_to_original
     if @link.type == "PrivateLink"
       render "links/password_form" and return
@@ -76,11 +75,22 @@ class LinksController < ApplicationController
     res = @link.redirect(params[:password])
 
     if res[:success]
+      register_access
       redirect_to @link.url, allow_other_host: true
     else
       flash.now[:error] = res[:message]
       render "links/password_form"
     end
+  end
+
+  # GET /links/1/access_per_day
+  def access_per_day
+    @access_counts = @link.accesses.group("DATE(created_at)").count
+  end
+
+  # GET /links/1/access_details
+  def access_details
+
   end
 
   private
