@@ -16,6 +16,7 @@ class PrivateLink < Link
   private
   def hash_password
     self.password = BCrypt::Password.create(self.password)
+    puts "UPDATEEEEED"
   end
 
 end

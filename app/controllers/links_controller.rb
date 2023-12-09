@@ -25,23 +25,19 @@ class LinksController < ApplicationController
   # POST /links or /links.json
   def create
     @link = Link.new(link_params)
-    respond_to do |format|
-      if @link.save
-        format.html { redirect_to links_path, notice: "Link was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @link.save
+      redirect_to links_path, notice: "Link was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /links/1 or /links/1.json
   def update
-    respond_to do |format|
-      if @link.update(link_params)
-        format.html { redirect_to link_url(@link), notice: "Link was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @link.update(link_params)
+      redirect_to link_url(@link), notice: "Link was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -49,10 +45,7 @@ class LinksController < ApplicationController
   def destroy
     @link.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to links_path, notice: "Link was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to links_path, notice: "Link was successfully destroyed."
   end
 
   # GET /l/slug
