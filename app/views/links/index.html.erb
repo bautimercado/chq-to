@@ -31,8 +31,10 @@
           </p>
         </div>
       <% end %>
-      <div class="text-center my-4">
-        <%= paginate @links %>
+      <div class="text-center my-4 flex items-center -mx-1">
+        <div class="mx-auto">
+          <%= paginate @links %>
+        </div>
       </div>
     <% else %>
       <p class="text-gray-700">You don't have any links yet. <%= link_to 'Create a new link', new_link_path, class: "text-blue-500 font-medium hover:underline" %>.</p>

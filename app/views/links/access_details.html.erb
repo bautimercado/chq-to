@@ -32,8 +32,10 @@
     <p class="text-gray-700">No access details available.</p>
   <% end %>
 
-  <div class="text-center my-4">
-    <%= paginate @access_details %>
+  <div class="text-center my-4 flex items-center -mx-1">
+    <div class="mx-auto">
+      <%= paginate @access_details %>
+    </div>
   </div>
 
   <% if params[:start_date].present? || params[:end_date].present? || params[:ip].present? %>

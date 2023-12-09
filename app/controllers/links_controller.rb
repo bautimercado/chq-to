@@ -85,7 +85,8 @@ class LinksController < ApplicationController
 
   # GET /links/1/access_per_day
   def access_per_day
-    @access_counts = @link.accesses.group("DATE(created_at)").count
+    @access_counts = @link.accesses.group("DATE(created_at)").count.to_a
+    @access_counts = Kaminari.paginate_array(@access_counts).page params[:page]
   end
 
   # GET /links/1/access_details
