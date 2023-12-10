@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chq.To</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "links", "data-turbo-track": "reload" %>
-    <meta name="csrf-token" content="<%= form_authenticity_token %>" />
-  </head>
-  <body class="bg-gray-100 font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chq.To</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "links", "data-turbo-track": "reload" %>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>" />
+</head>
+<body class="bg-gray-100 font-sans">
 
-    <nav class="bg-red-800 p-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <a href="/" class="text-white text-2xl font-bold">Chq.To</a>
+<nav class="bg-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-black text-2xl font-bold">
+      <i class="fas fa-circle mr-2"></i>Chq.To
+    </a>
 
-        <div class="flex items-center">
-          <% if signed_in? %>
-            <%= link_to "Your links", links_path %>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4"%>
-            <%= link_to "My profile", user_path(current_user), class: "text-white hover:text-gray-200 px-4 py-2"%>
-          <% else %>
-            <a href="<%= new_user_session_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign In</a>
-            <a href="<%= new_user_registration_path %>" class="text-white hover:text-gray-200 px-4 py-2">Sign Up</a>
-          <% end %>
+    <div class="flex items-center space-x-4">
+      <div class="relative inline-block text-left">
+        <div>
+          <button type="button" class="inline-flex items-center justify-center w-10 h-10 p-2 rounded-full bg-gray-200 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" id="userDropdown" aria-expanded="true" aria-haspopup="true">
+            <i class="fas fa-user"></i>
+          </button>
+        </div>
+
+        <!-- Dropdown panel, hidden by default -->
+        <div id="userMenu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="userDropdown">
+          <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <% if signed_in? %>
+              <%= link_to "Your links", links_path, class: "block px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-gray-900" %>
+              <%= link_to "My profile", user_path(current_user), class: "block px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-gray-900" %>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 hover:text-gray-900", data: { confirm: "Are you sure?" } %>
+            <% else %>
+              <%= link_to "Sign In", new_user_session_path, class: "block px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-gray-900" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "block px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-gray-900" %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </div>
+</nav>
 
-    <main class="container mx-auto mt-10 px-5 flex flex-col items-center">
-      <% if notice.present? %>
-        <div class="bg-green-500 text-white py-2 px-4 mb-4 rounded">
-          <%= notice %>
-        </div>
-      <% end %>
+<main class="container mx-auto mt-10 px-5 flex flex-col items-center">
+  <% if notice.present? %>
+    <div class="bg-green-500 text-white py-2 px-4 mb-4 rounded">
+      <%= notice %>
+    </div>
+  <% end %>
 
-      <% if alert.present? %>
-        <div class="bg-red-500 text-white py-2 px-4 mb-4 rounded">
-          <%= alert %>
-        </div>
-      <% end %>
+  <% if alert.present? %>
+    <div class="bg-red-500 text-white py-2 px-4 mb-4 rounded">
+      <%= alert %>
+    </div>
+  <% end %>
 
-      <%= yield %>
-    </main>
-  </body>
+  <%= yield %>
+</main>
+</body>
 </html>
+
 

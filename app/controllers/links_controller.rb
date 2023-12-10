@@ -56,6 +56,7 @@ class LinksController < ApplicationController
     res = @link.redirect
     if res[:success]
       register_access
+      puts "ONE ACCESSSSSSS"
       redirect_to @link.url, allow_other_host: true
     else
       flash[:error] = res[:message]
