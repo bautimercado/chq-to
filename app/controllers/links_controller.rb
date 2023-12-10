@@ -55,8 +55,7 @@ class LinksController < ApplicationController
     end
     res = @link.redirect
     if res[:success]
-      register_access
-      puts "ONE ACCESSSSSSS"
+      Access.create(link_id: @link.id, ip_address: request.remote_ip)
       redirect_to @link.url, allow_other_host: true
     else
       flash[:error] = res[:message]
@@ -69,7 +68,7 @@ class LinksController < ApplicationController
     res = @link.redirect(params[:password])
 
     if res[:success]
-      register_access
+      Access.create(link_id: @link.id, ip_address: request.remote_ip)
       redirect_to @link.url, allow_other_host: true
     else
       flash.now[:error] = res[:message]
@@ -79,8 +78,7 @@ class LinksController < ApplicationController
 
   # GET /links/1/access_per_day
   def access_per_day
-    @access_counts = @link.accesses.group("DATE(created_at)").count.to_a
-    @access_counts = Kaminari.paginate_array(@access_counts).page params[:page]
+    @access_counts = @link.accesses.group("DATE(created_at)").count
   end
 
   # GET /links/1/access_details
@@ -129,9 +127,5 @@ class LinksController < ApplicationController
       unless @link.user == current_user
         render file: "#{Rails.root}/public/403.html", layout: false
       end
-    end
-
-    def register_access
-      Access.create(link_id: @link.id, ip_address: request.remote_ip)
     end
 end
