@@ -1,41 +1,58 @@
-<div class="mx-auto md:w-2/3 w-full flex items-center justify-center space-y-4">
+<div class="container mx-auto mt-8">
   <% if @error_message %>
     <p class="text-red-500 font-semibold mb-5"><%= @error_message %></p>
   <% end %>
 
-  <div class="w-full bg-white rounded-lg shadow-md p-8">
+  <div class="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md">
     <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <p class="py-2 px-4 bg-green-50 text-green-500 font-medium rounded-t-md"><%= notice %></p>
     <% end %>
 
-    <div class="text-gray-700 space-y-4">
-      <p class="font-semibold">Original URL: <%= @link.url %></p>
-      <p class="font-semibold">Short URL: <%= "#{Rails.application.routes.default_url_options[:host]}/l/#{@link.slug}" %></p>
-      <p class="font-semibold">Type: <%= @link.type %></p>
+    <div class="p-6 space-y-4">
+      <p class="text-gray-700 font-semibold">Original URL:</p>
+      <p><%= @link.url %></p>
+
+      <p class="text-gray-700 font-semibold">Short URL:</p>
+      <p><%= "#{Rails.application.routes.default_url_options[:host]}/l/#{@link.slug}" %></p>
+
+      <p class="text-gray-700 font-semibold">Type:</p>
+      <p><%= @link.type %></p>
+
       <% if @link.name.present? %>
-        <p class="font-semibold">Name: <%= @link.name %></p>
+        <p class="text-gray-700 font-semibold">Name:</p>
+        <p><%= @link.name %></p>
       <% end %>
+
       <% if @link.expiration_date.present? %>
-        <p class="font-semibold">Expiration date: <%= @link.expiration_date %></p>
+        <p class="text-gray-700 font-semibold">Expiration date:</p>
+        <p><%= @link.expiration_date %></p>
       <% end %>
+
       <% if @link.accessed.present? %>
-        <p class="font-semibold">Accessed: <%= @link.accessed %></p>
+        <p class="text-gray-700 font-semibold">Accessed:</p>
+        <p><%= @link.accessed %></p>
       <% end %>
     </div>
 
-    <div class="flex justify-between items-center mt-8">
-      <%= link_to "Redirect", redirect_to_original_url(@link.slug), class: "bg-blue-600 text-white px-4 py-2" %>
+    <div class="p-6 bg-gray-100">
+      <%= link_to "Redirect", redirect_to_original_url(@link.slug), class: "block text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-full mb-2" %>
 
-      <div class="flex space-x-2">
-        <%= link_to "Edit", edit_link_path(@link), class: "bg-gray-300 text-gray-700 px-4 py-2" %>
-        <%= link_to "Access count per day", access_per_day_path(@link), class: "bg-gray-300 text-gray-700 px-4 py-2" %>
-        <%= link_to "Access details", access_details_path(@link), class: "bg-gray-300 text-gray-700 px-4 py-2" %>
-        <%= button_to "Destroy", link_path(@link), method: :delete, onclick: "return confirm('Are you sure?')", class: "bg-red-500 text-white px-4 py-2" %>
-      </div>
+      <%= link_to "Edit", edit_link_path(@link), class: "block text-gray-700 hover:text-gray-900 py-2 px-4 rounded-full mb-2" %>
 
-      <%= link_to "Back to links", links_path, class: "bg-gray-300 text-gray-700 px-4 py-2" %>
+      <%= link_to "Access count per day", access_per_day_path(@link), class: "block text-gray-700 hover:text-gray-900 py-2 px-4 rounded-full mb-2" %>
+
+      <%= link_to "Access details", access_details_path(@link), class: "block text-gray-700 hover:text-gray-900 py-2 px-4 rounded-full mb-2" %>
+
+      <%= button_to "Destroy", link_path(@link), method: :delete, data: { confirm: "Are you sure?" }, class: "block text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-full" %>
+    </div>
+
+    <div class="flex justify-end p-6">
+      <%= link_to "Back to links", links_path, class: "text-gray-700 hover:text-gray-900" %>
     </div>
   </div>
 </div>
+
+
+
 
 

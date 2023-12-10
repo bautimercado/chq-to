@@ -17,7 +17,7 @@
     <div class="mb-4">
       <%= f.label :password, class: "block text-gray-600 text-sm font-medium mb-2" %>
       <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em class="text-sm">(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password", class: "w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 py-2" %>
     </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="flex items-center">
-      <%= f.submit "Sign up", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %>
+      <%= f.submit "Sign up", class: "w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300" %>
     </div>
   <% end %>
 
