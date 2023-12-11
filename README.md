@@ -80,3 +80,14 @@ rails s
 - Cantidad de accesos por día: Utilizando un `group` y `count` por _created_at_
 - Reporte de accesos: Se muestra la IP del cliente, junto con la fecha y hora de acceso. Se puede filtrar por rango de fechas y/o dirección IP.
 
+# Sobre los datos de la BD:
+
+- Tenemos 2 usuarios:
+  - Usuario con links:
+    - Correo electrónico: `"juan.perez@live.com"`
+    - Nombre de usuario: `"juan.p"`
+    - Contraseña: `"1234"`
+  - Usuario sin links:
+    - Correo electrónico: `"ana.diaz@live.com"`
+    - Nombre de usuario: `"ana.d"`
+    - Contraseña: `"1234"`
