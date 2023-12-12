@@ -32,6 +32,7 @@ bundle install
 3. Crear base de datos
 
 ```bash
+rails db:create
 rails db:migrate
 ```
 
