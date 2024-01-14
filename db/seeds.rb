@@ -34,4 +34,22 @@ ephimeral_link = EphemeralLink.create(url: "https://github.com/heartcombo/devise
                                       name: "Accesible",
                                       user: juan)
 
-puts "Seed completed!"
+ephimeral_link_accessed = EphemeralLink.create(url: "https://guides.rubyonrails.org/active_record_basics.html",
+                                                    name: "Accedido",
+                                                    user: juan)
+
+acceso_1 = Access.create(link: regular_link, ip_address: "127.0.0.1")
+acceso_2 = Access.create(link: regular_link, ip_address: "127.0.0.1")
+acceso_3 = Access.create(link: temporal_link, ip_address: "127.0.0.1")
+acceso_4 = Access.create(link: temporal_link, ip_address: "127.0.0.1")
+acceso_5 = Access.create(link: temporal_link, ip_address: "127.0.0.1")
+acceso_6 = Access.create(link: temporal_link_expired, ip_address: "127.0.0.1")
+acceso_7 = Access.create(link: regular_link, ip_address: "127.0.0.1")
+acceso_8 = Access.create(link: private_link, ip_address: "127.0.0.1")
+acceso_9 = Access.create(link: private_link, ip_address: "127.0.0.1")
+acceso_10 = Access.create(link: private_link, ip_address: "127.0.0.1")
+acceso_11 = Access.create(link: private_link, ip_address: "127.0.0.1")
+acceso_12 = Access.create(link: ephimeral_link_accessed, ip_address: "127.0.0.1")
+acceso_13 = Access.create(link: ephimeral_link_accessed, ip_address: "127.0.0.1")
+
+puts "Seeds completed!"
