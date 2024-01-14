@@ -13,7 +13,7 @@
       <p><%= @link.url %></p>
 
       <p class="text-gray-700 font-semibold">Short URL:</p>
-      <p><%= "#{Rails.application.routes.default_url_options[:host]}/l/#{@link.slug}" %></p>
+      <p><%= redirect_to_original_url(@link.slug) %></p>
 
       <p class="text-gray-700 font-semibold">Type:</p>
       <p><%= @link.type %></p>
