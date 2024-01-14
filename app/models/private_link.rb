@@ -1,7 +1,7 @@
 require 'bcrypt'
 
 class PrivateLink < Link
-  before_save :hash_password
+  before_create :hash_password
 
   validates :password, presence: true
 
