@@ -6,10 +6,13 @@ class Link < ApplicationRecord
   has_many :accesses, dependent: :destroy
 
   validates :type, presence: true
+  validates :slug, uniqueness: true
   validates :url, presence: true, format: {
     with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\z/ix,
-    message: "is not a valid URL"
-  }
+    message: "Invalid URL." }
+  validates :type, inclusion: {
+    in: %(RegularLink, TemporalLink, PrivateLink, EphemeralLink),
+    message: "Invalid type." }
 
   private
 

@@ -1,8 +1,7 @@
 class EphemeralLink < Link
   before_create :enable_access
 
-  #validates :accessed, inclusion: { in: [true, false] },
-  #          exclusion: { in: [nil] }
+  validates :accessed, inclusion: { in: [true, false, nil] }
 
   def redirect
     if self.accessed
