@@ -25,16 +25,10 @@ class LinksController < ApplicationController
   # POST /links or /links.json
   def create
     @link = Link.new(link_params)
-    puts "EL LINK ES: #{@link}"
-    if @link.type == "EphemeralLink"
-      puts "EFIMERO"
-      puts "EL VALOR DE ACCESSED: #{@link.accessed}"
-    end
     if @link.save
 
       redirect_to links_path, notice: "Link was successfully created."
     else
-      puts "UPS!, LOS ERRORES SON: #{@link.errors.errors}"
       render :new, status: :unprocessable_entity
     end
   end
